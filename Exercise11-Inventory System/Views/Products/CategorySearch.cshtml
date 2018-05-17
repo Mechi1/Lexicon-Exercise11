@@ -1,0 +1,35 @@
+﻿@model Exercise11_Inventory_System.Models.ProductCategorySearch
+
+@{
+    ViewBag.Title = "Search items of category";
+}
+
+<h2>Search for Items</h2>
+
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Categories, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("category", new SelectList(Model.Categories), "", new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary" formaction='@Url.Action("Category", "Products", new { category = "" })' formmethod="get">Search</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Index", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

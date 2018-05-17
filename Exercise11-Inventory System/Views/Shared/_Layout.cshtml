@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Inventory System</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Inventory System", "Index", "Products", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                            Products
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("List products", "Index", "Products")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("List dairies", "Category", "Products", new { category = "Dairy" }, null)</li>
+                            <li>@Html.ActionLink("List frozen foods", "Category", "Products", new { category = "Frozen Food" }, null)</li>
+                            <li>@Html.ActionLink("List electronics", "Electronics", "Products")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Product search", "CategorySearch", "Products", new { category = "" }, null)</li>
+                            <li>@Html.ActionLink("Restock list", "Restock", "Products")</li>
+                            @*<li>@Html.ActionLink("Out-of-stock items", "OutOfStock" , "Products")</li>*@
+                        </ul>
+                    </li>
+                    @if (ViewBag.Count > 0)
+                    {
+                        <li class="nav-alert">
+                            <a href="@Url.Action("OutOfStock", "Products")">Out-of-stock items <span class="badge badge-warning">@ViewBag.Count</span></a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="@Url.Action("OutOfStock", "Products")">Out-of-stock items</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - The Corp Corporation &amp; Co. Inc. &amp; friends</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
